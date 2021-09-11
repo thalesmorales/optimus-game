@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/thalesmorales/optimus-game#readme",
   "dependencies": {
-    "phaser": "^3.55.2"
+    "phaser": "^3.55.2",
+    "phaser-ce": "^2.18.0"
   }
 }
