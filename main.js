@@ -18,7 +18,7 @@ window.onload = function () {
     game.load.atlas(
       "game_sprites",
       "assets/elements_sprites-04.png",
-      "assets/rocks.json"
+      "assets/elements.json"
     );
   }
 
@@ -42,7 +42,7 @@ window.onload = function () {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.enable(astronaut, Phaser.Physics.ARCADE);
 
-    astronaut.body.gravity.y = 400;
+    astronaut.body.gravity.y = 200;
     astronaut.body.collideWorldBounds = true;
     startY = astronaut.y;
 
@@ -66,7 +66,7 @@ window.onload = function () {
     if (blockHeight) {
       let rock = game.add.sprite(
         game.world.right,
-        250,
+        290,
         "game_sprites",
         "rock0002"
       );
@@ -82,7 +82,7 @@ window.onload = function () {
 
       rocks.forEach(function (rock) {
         game.physics.enable(rock, Phaser.Physics.ARCADE);
-        rock.body.velocity.x = -300;
+        rock.body.velocity.x = -500;
         rock.scale.set(0.7);
 
         rock.body.bounce.set(1, 1);
