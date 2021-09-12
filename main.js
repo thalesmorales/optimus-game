@@ -15,32 +15,52 @@ window.onload = function () {
       298,
       7
     );
+    game.load.atlas(
+      "game_sprites",
+      "assets/elements_sprites-04.png",
+      "assets/rocks.json"
+    );
   }
 
   let astronaut;
   let back;
+  let startY;
+  let blocks;
 
   function create() {
+    // load the background of stage 1
     back = game.add.image(0, 0, "planet");
     back.scale.set(1);
-    back.smoothed = false;
 
-    astronaut = game.add.sprite(-24, 128, "astronaut");
+    // load the game hero
+    astronaut = game.add.sprite(0, 102, "astronaut");
     astronaut.scale.set(1);
-    astronaut.smoothed = false;
-    astronaut.animations.add("run");
-    astronaut.animations.play("run", 10, true);
+    astronaut.animations.add("walk");
+    astronaut.animations.play("walk", 10, true);
+
+    // Load physics
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.physics.enable(astronaut, Phaser.Physics.ARCADE);
+
+    astronaut.body.gravity.y = 500;
+    astronaut.body.collideWorldBounds = true;
+    startY = astronaut.y;
+
+    blocks = game.add.group();
+    let rock = game.add.sprite(0, 50, "game_sprites", "rock0001");
+    let rock2 = game.add.sprite(250, 250, "game_sprites", "rock0002");
+    blocks.add(rock);
+    blocks.add(rock2);
+    //blocks.createMultiple(5, "game_sprites", ["rock0001", "rock0002"], true);
+    //blocks.align(5, 3, 160, 160, Phaser.CENTER);
   }
 
   function update() {
-    if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) astronaut.x -= 4;
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
-      astronaut.x += 4;
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.UP)) astronaut.y -= 4;
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) astronaut.y += 4;
-  }
-
-  function render() {
-    game.debug.sprite(astronaut, 20, 32);
+    if (
+      game.input.keyboard.isDown(Phaser.Keyboard.UP) &&
+      astronaut.y === startY
+    )
+      astronaut.body.velocity.y -= 400;
+    if (astronaut.x < 200) astronaut.x += 2;
   }
 };
