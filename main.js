@@ -12,7 +12,7 @@ window.onload = function () {
       "astronaut",
       "assets/astronauta145x298.png",
       145,
-      298,
+      268,
       7
     );
     game.load.atlas(
@@ -33,7 +33,7 @@ window.onload = function () {
     back.scale.set(1);
 
     // load the game hero
-    astronaut = game.add.sprite(0, 102, "astronaut");
+    astronaut = game.add.sprite(0, 132, "astronaut");
     astronaut.scale.set(1);
     astronaut.animations.add("walk");
     astronaut.animations.play("walk", 10, true);
@@ -42,7 +42,7 @@ window.onload = function () {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.enable(astronaut, Phaser.Physics.ARCADE);
 
-    astronaut.body.gravity.y = 500;
+    astronaut.body.gravity.y = 400;
     astronaut.body.collideWorldBounds = true;
     startY = astronaut.y;
 
@@ -57,6 +57,8 @@ window.onload = function () {
     )
       astronaut.body.velocity.y -= 400;
     if (astronaut.x < 200) astronaut.x += 2;
+    game.physics.arcade.collide(astronaut, rocks);
+    console.log(astronaut.y);
   }
 
   function makeRocks() {
