@@ -1,0 +1,26 @@
+{
+  "name": "optimus-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "phaser": "2.6.2"
+  },
+  "devDependencies": {
+    "http-server": "^13.0.1"
+  },
+  "scripts": {
+    "start": "http-server ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thalesmorales/optimus-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thalesmorales/optimus-game/issues"
+  },
+  "homepage": "https://github.com/thalesmorales/optimus-game#readme"
+}
