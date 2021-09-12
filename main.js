@@ -12,7 +12,7 @@ window.onload = function () {
       "astronaut",
       "assets/astronauta145x298.png",
       145,
-      298,
+      268,
       7
     );
     game.load.atlas(
@@ -25,7 +25,7 @@ window.onload = function () {
   let astronaut;
   let back;
   let startY;
-  let blocks;
+  let rocks;
 
   function create() {
     // load the background of stage 1
@@ -33,7 +33,7 @@ window.onload = function () {
     back.scale.set(1);
 
     // load the game hero
-    astronaut = game.add.sprite(0, 102, "astronaut");
+    astronaut = game.add.sprite(0, 132, "astronaut");
     astronaut.scale.set(1);
     astronaut.animations.add("walk");
     astronaut.animations.play("walk", 10, true);
@@ -42,17 +42,12 @@ window.onload = function () {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.enable(astronaut, Phaser.Physics.ARCADE);
 
-    astronaut.body.gravity.y = 500;
+    astronaut.body.gravity.y = 400;
     astronaut.body.collideWorldBounds = true;
     startY = astronaut.y;
 
-    blocks = game.add.group();
-    let rock = game.add.sprite(0, 50, "game_sprites", "rock0001");
-    let rock2 = game.add.sprite(250, 250, "game_sprites", "rock0002");
-    blocks.add(rock);
-    blocks.add(rock2);
-    //blocks.createMultiple(5, "game_sprites", ["rock0001", "rock0002"], true);
-    //blocks.align(5, 3, 160, 160, Phaser.CENTER);
+    rocks = game.add.group();
+    setInterval(makeRocks, 1000);
   }
 
   function update() {
@@ -62,5 +57,36 @@ window.onload = function () {
     )
       astronaut.body.velocity.y -= 400;
     if (astronaut.x < 200) astronaut.x += 2;
+    game.physics.arcade.collide(astronaut, rocks);
+    console.log(astronaut.y);
+  }
+
+  function makeRocks() {
+    let blockHeight = game.rnd.integerInRange(0, 1);
+    if (blockHeight) {
+      let rock = game.add.sprite(
+        game.world.right,
+        250,
+        "game_sprites",
+        "rock0002"
+      );
+      rocks.add(rock);
+    } else {
+      let rock = game.add.sprite(
+        game.world.right,
+        50,
+        "game_sprites",
+        "rock0001"
+      );
+      rocks.add(rock);
+
+      rocks.forEach(function (rock) {
+        game.physics.enable(rock, Phaser.Physics.ARCADE);
+        rock.body.velocity.x = -300;
+        rock.scale.set(0.7);
+
+        rock.body.bounce.set(1, 1);
+      });
+    }
   }
 };
