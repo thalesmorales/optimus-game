@@ -33,7 +33,11 @@ window.onload = function () {
 
     // load the game hero
     spaceships = game.add.group();
-    game.add.sprite(0, 0, "spaceship_sprites", "spaceship0002");
+    game.add.sprite(0, 0, "spaceship_sprites", "spaceship0001");
+    game.add.sprite(0, 150, "spaceship_sprites", "spaceship0002");
+    game.add.sprite(0, 300, "spaceship_sprites", "spaceship0003");
+    game.add.sprite(0, 450, "spaceship_sprites", "spaceship0004");
+    game.add.sprite(0, 600, "spaceship_sprites", "spaceship0005");
     // Load physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -41,9 +45,7 @@ window.onload = function () {
     // setInterval(makeRocks, 1000);
   }
 
-  function update() {
-
-  }
+  function update() {}
 
   function makeRocks() {
     // let blockHeight = game.rnd.integerInRange(0, 1);
