@@ -15,8 +15,8 @@ window.onload = function () {
     );
     game.load.atlas(
       "spaceship_sprites",
-      "assets/elements_sprites-04.png",
-      "assets/spaceship.json"
+      "assets/nave_sprite.png",
+      "assets/nave_sprite.json"
     );
   }
 
@@ -33,6 +33,7 @@ window.onload = function () {
 
     // load the game hero
     spaceships = game.add.group();
+    game.add.sprite(0, 0, "spaceship_sprites", "spaceship0002");
     // Load physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -41,12 +42,7 @@ window.onload = function () {
   }
 
   function update() {
-    if(game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
-      game.add.sprite(0, 0, "spaceship_sprites", "spaceship0001");
-    }
-    if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-      game.add.sprite(0, 0, "spaceship_sprites", "spaceship0002");
-    }
+
   }
 
   function makeRocks() {
