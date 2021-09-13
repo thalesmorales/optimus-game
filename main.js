@@ -23,6 +23,7 @@ window.onload = function () {
   }
 
   let astronaut;
+  let backgrounds;
   let back;
   let startY;
   let rocks;
@@ -31,6 +32,12 @@ window.onload = function () {
     // load the background of stage 1
     back = game.add.image(0, 0, "planet");
     back.scale.set(1);
+
+    backgrounds = game.add.group();
+    backgrounds.add(back);
+
+    back = game.add.image(back.width, 0, "planet");
+    backgrounds.add(back);
 
     // load the game hero
     astronaut = game.add.sprite(0, 197, "astronaut");
@@ -42,7 +49,7 @@ window.onload = function () {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.enable(astronaut, Phaser.Physics.ARCADE);
 
-    astronaut.body.gravity.y = 800;
+    astronaut.body.gravity.y = 450;
     astronaut.body.collideWorldBounds = true;
     startY = astronaut.y;
 
@@ -59,7 +66,14 @@ window.onload = function () {
       astronaut.body.velocity.y -= 600;
     if (astronaut.x < 200) astronaut.x += 2;
     game.physics.arcade.collide(astronaut, rocks);
-    console.log(astronaut.y);
+    backgrounds.forEach(function (background) {
+      background.x -= 3;
+      if (background.x < -1885) {
+        background.x = background.width - 5;
+        backgrounds.add(back);
+      }
+    });
+    console.log(backgrounds.x);
   }
 
   function makeRocks() {
