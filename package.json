@@ -10,7 +10,7 @@
     "http-server": "^13.0.1"
   },
   "scripts": {
-    "start": "http-server ./"
+    "start": "http-server -c-1 ./"
   },
   "repository": {
     "type": "git",

@@ -5,8 +5,23 @@ window.onload = function () {
     update: update,
   });
 
+  WebFontConfig = {
+    active: function () {
+      game.time.events.add(Phaser.Timer.SECOND, createText, this);
+    },
+    google: {
+      families: ["Bangers"],
+    },
+  };
+
   function preload() {
     game.load.image("planet", "assets/fase01_background-01.png");
+
+    // load the Google WebFont Loader script
+    game.load.script(
+      "webfont",
+      "//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"
+    );
 
     game.load.spritesheet(
       "astronaut",
@@ -26,12 +41,21 @@ window.onload = function () {
     ]);
   }
 
+  function createText() {
+    text = game.add.text(700, 50, counter);
+    text.fontSize = 60;
+    text.font = "Bangers";
+    game.time.events.loop(Phaser.Timer.SECOND, decreaseCounter, this);
+  }
+
   let astronaut;
   let backgrounds;
   let soundtrack;
+  let text;
   let back;
   let startY;
   let rocks;
+  let counter = 30;
 
   function create() {
     // load the background of stage 1
@@ -39,7 +63,7 @@ window.onload = function () {
     back.scale.set(1);
 
     soundtrack = game.add.audio("soundtrack_stage1");
-    //soundtrack.loopFull(0.6);
+    soundtrack.loopFull(0.6);
 
     backgrounds = game.add.group();
     backgrounds.add(back);
@@ -62,7 +86,17 @@ window.onload = function () {
     startY = astronaut.y;
 
     rocks = game.add.group();
-    setInterval(makeRocks, 1500);
+    game.time.events.loop(Phaser.Timer.SECOND, makeRocks, this);
+  }
+
+  function decreaseCounter() {
+    counter--;
+    text.setText(counter);
+  }
+
+  function collision() {
+    counter += 5;
+    text.setText("+" + counter);
   }
 
   function update() {
@@ -77,10 +111,9 @@ window.onload = function () {
     game.physics.arcade.collide(astronaut, rocks);
 
     backgrounds.forEach(function (background) {
-      background.x -= 3;
-      if (background.x < -background.width) {
-        background.x = background.width - 5;
-        backgrounds.add(back);
+      background.x -= 4;
+      if (background.x <= -background.width) {
+        background.x = background.width - 4;
       }
     });
   }
@@ -110,8 +143,7 @@ window.onload = function () {
       }
       game.physics.enable(rock, Phaser.Physics.ARCADE);
       rock.body.velocity.x = -500;
-      //rock.scale.set(0.7);
-      console.log(rock.height);
+      game.physics.arcade.collide(astronaut, rock, collision);
 
       rock.body.bounce.set(1, 1);
     });
