@@ -18,7 +18,7 @@ window.onload = function () {
     game.load.atlas(
       "game_sprites",
       "assets/elements_sprites-04.png",
-      "assets/elements.json"
+      "assets/elements_sprites-04.json"
     );
     game.load.audio("soundtrack_stage1", [
       "assets/Trilha_fase01.ogg",
@@ -39,7 +39,7 @@ window.onload = function () {
     back.scale.set(1);
 
     soundtrack = game.add.audio("soundtrack_stage1");
-    soundtrack.loopFull(0.6);
+    //soundtrack.loopFull(0.6);
 
     backgrounds = game.add.group();
     backgrounds.add(back);
@@ -88,21 +88,21 @@ window.onload = function () {
   function makeRocks() {
     let blockHeight = game.rnd.integerInRange(0, 1);
     if (blockHeight) {
-      let rock = game.add.sprite(
+      game.add.sprite(
         game.width,
         backgrounds.height - 150,
         "game_sprites",
-        "rock0002"
+        "rock0002",
+        rocks
       );
-      rocks.add(rock);
     } else {
-      let rock = game.add.sprite(
+      game.add.sprite(
         game.width,
         backgrounds.height - 370,
         "game_sprites",
-        "rock0001"
+        "rock0001",
+        rocks
       );
-      rocks.add(rock);
     }
     rocks.forEach(function (rock) {
       if (rock.x < game.world.left) {
@@ -110,7 +110,8 @@ window.onload = function () {
       }
       game.physics.enable(rock, Phaser.Physics.ARCADE);
       rock.body.velocity.x = -500;
-      rock.scale.set(0.7);
+      //rock.scale.set(0.7);
+      console.log(rock.height);
 
       rock.body.bounce.set(1, 1);
     });

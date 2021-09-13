@@ -19,7 +19,6 @@
   ],
   "meta": {
     "image": "elements_sprites-04.png",
-    "size": { "w": 1051, "h": 600 },
-    "scale": "1"
+    "size": { "w": 1051, "h": 600 }
   }
 }
