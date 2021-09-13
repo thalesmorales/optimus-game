@@ -20,10 +20,15 @@ window.onload = function () {
       "assets/elements_sprites-04.png",
       "assets/elements.json"
     );
+    game.load.audio("soundtrack_stage1", [
+      "assets/Trilha_fase01.ogg",
+      "assets/Trilha_fase01.mp3",
+    ]);
   }
 
   let astronaut;
   let backgrounds;
+  let soundtrack;
   let back;
   let startY;
   let rocks;
@@ -32,6 +37,9 @@ window.onload = function () {
     // load the background of stage 1
     back = game.add.image(0, 0, "planet");
     back.scale.set(1);
+
+    soundtrack = game.add.audio("soundtrack_stage1");
+    soundtrack.loopFull(0.6);
 
     backgrounds = game.add.group();
     backgrounds.add(back);
@@ -55,7 +63,6 @@ window.onload = function () {
 
     rocks = game.add.group();
     setInterval(makeRocks, 1500);
-    console.log(game.world.right);
   }
 
   function update() {
