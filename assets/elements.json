@@ -15,46 +15,6 @@
       "trimmed": true,
       "spriteSourceSize": { "x": 0, "y": 0, "w": 175, "h": 104 },
       "sourceSize": { "w": 175, "h": 104 }
-    },
-    {
-      "filename": "spaceshipidle",
-      "frame": { "x": 456, "y": 16, "w": 130, "h": 103 },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 131, "h": 104 },
-      "sourceSize": { "w": 131, "h": 104 }
-    },
-    {
-      "filename": "spaceshipleft",
-      "frame": { "x": 451, "y": 165, "w": 124, "h": 104 },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 125, "h": 105 },
-      "sourceSize": { "w": 125, "h": 105 }
-    },
-    {
-      "filename": "spaceshipright",
-      "frame": { "x": 269, "y": 450, "w": 132, "h": 110 },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 111 },
-      "sourceSize": { "w": 133, "h": 111 }
-    },
-    {
-      "filename": "spaceshipup",
-      "frame": { "x": 435, "y": 467, "w": 132, "h": 79 },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 80 },
-      "sourceSize": { "w": 133, "h": 80 }
-    },
-    {
-      "filename": "spaceshipdown",
-      "frame": { "x": 573, "y": 467, "w": 132, "h": 79 },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 80 },
-      "sourceSize": { "w": 133, "h": 80 }
     }
   ],
   "meta": {

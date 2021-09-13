@@ -1,0 +1,25 @@
+{
+    "frames": [
+      {
+        "filename": "spaceship0001",
+        "frame": { "x": 15, "y": 444, "w": 135, "h": 153 },
+        "rotated": false,
+        "trimmed": true,
+        "spriteSourceSize": { "x": 0, "y": 0, "w": 136, "h": 154 },
+        "sourceSize": { "w": 136, "h": 154 }
+      },
+      {
+        "filename": "spaceship0002",
+        "frame": { "x": 15, "y": 444, "w": 135, "h": 153 },
+        "rotated": false,
+        "trimmed": true,
+        "spriteSourceSize": { "x": 0, "y": 0, "w": 136, "h": 154 },
+        "sourceSize": { "w": 136, "h": 154 }
+      }
+    ],
+    "meta": {
+      "image": "elements_sprites-04.png",
+      "size": { "w": 1051, "h": 600 },
+      "scale": "1"
+    }
+  }
