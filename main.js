@@ -1,5 +1,5 @@
 window.onload = function () {
-  let game = new Phaser.Game(1885, 400, Phaser.AUTO, "", {
+  let game = new Phaser.Game(800, 600, Phaser.AUTO, "", {
     preload: preload,
     create: create,
     update: update,
@@ -40,7 +40,7 @@ window.onload = function () {
     backgrounds.add(back);
 
     // load the game hero
-    astronaut = game.add.sprite(0, 197, "astronaut");
+    astronaut = game.add.sprite(0, 397, "astronaut");
     astronaut.scale.set(1);
     astronaut.animations.add("walk");
     astronaut.animations.play("walk", 10, true);
@@ -49,13 +49,13 @@ window.onload = function () {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.enable(astronaut, Phaser.Physics.ARCADE);
 
-    astronaut.body.gravity.y = 450;
+    astronaut.body.gravity.y = 1000;
     astronaut.body.collideWorldBounds = true;
     startY = astronaut.y;
 
     rocks = game.add.group();
-    makeRocks();
-    setInterval(makeRocks, 2000);
+    setInterval(makeRocks, 1500);
+    console.log(game.world.right);
   }
 
   function update() {
@@ -63,33 +63,35 @@ window.onload = function () {
       game.input.keyboard.isDown(Phaser.Keyboard.UP) &&
       astronaut.y === startY
     )
-      astronaut.body.velocity.y -= 600;
+      astronaut.body.velocity.y -= 350;
+
     if (astronaut.x < 200) astronaut.x += 2;
+
     game.physics.arcade.collide(astronaut, rocks);
+
     backgrounds.forEach(function (background) {
       background.x -= 3;
-      if (background.x < -1885) {
+      if (background.x < -background.width) {
         background.x = background.width - 5;
         backgrounds.add(back);
       }
     });
-    console.log(backgrounds.x);
   }
 
   function makeRocks() {
     let blockHeight = game.rnd.integerInRange(0, 1);
     if (blockHeight) {
       let rock = game.add.sprite(
-        game.world.right,
-        290,
+        game.width,
+        backgrounds.height - 150,
         "game_sprites",
         "rock0002"
       );
       rocks.add(rock);
     } else {
       let rock = game.add.sprite(
-        game.world.right,
-        20,
+        game.width,
+        backgrounds.height - 370,
         "game_sprites",
         "rock0001"
       );
