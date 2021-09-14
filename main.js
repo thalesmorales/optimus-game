@@ -47,6 +47,9 @@ window.onload = function () {
       "assets/Trilha_fase01.ogg",
       "assets/Trilha_fase01.mp3",
     ]);
+
+    game.load.audio("audio_primo", ["assets/audio_primo.ogg"]);
+
     game.load.audio("jump_sound1", ["assets/jump_sfx_01.ogg"]);
     game.load.audio("jump_sound2", ["assets/jump_sfx_02.ogg"]);
   }
@@ -82,7 +85,9 @@ window.onload = function () {
 
     // load audios
     soundtrack = game.add.audio("soundtrack_stage1");
-    soundtrack.loopFull(0.6);
+    soundtrack.loopFull(0.3);
+
+    let start_audio = game.add.audio("audio_primo");
 
     jump1 = game.add.audio("jump_sound1");
     jump2 = game.add.audio("jump_sound2");
@@ -118,10 +123,12 @@ window.onload = function () {
 
     rocks = game.add.group();
     loop = game.time.events.loop(Phaser.Timer.SECOND, makeRocks, this);
+
+    start_audio.play();
   }
 
   function decreaseCounter() {
-    counter--;
+    counter -= 5;
     text.setText(counter);
   }
 
