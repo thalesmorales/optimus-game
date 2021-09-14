@@ -60,6 +60,7 @@ window.onload = function () {
   let startY;
   let rocks;
   let counter = 30;
+  let loop;
 
   function create() {
     // load the background of stage 1
@@ -94,7 +95,7 @@ window.onload = function () {
     startY = astronaut.y;
 
     rocks = game.add.group();
-    game.time.events.loop(Phaser.Timer.SECOND, makeRocks, this);
+    loop = game.time.events.loop(Phaser.Timer.SECOND, makeRocks, this);
   }
 
   function decreaseCounter() {
@@ -110,7 +111,8 @@ window.onload = function () {
   function update() {
     if (
       game.input.keyboard.isDown(Phaser.Keyboard.UP) &&
-      astronaut.y === startY
+      astronaut.y === startY &&
+      loop.loop
     ) {
       astronaut.body.velocity.y -= 350;
 
@@ -141,6 +143,15 @@ window.onload = function () {
         background.x = background.width - 4;
       }
     });
+
+    if (counter === 0) {
+      loop.loop = false;
+      rocks.exist = false;
+      text.exist = false;
+      rocks.forEach(function (rock) {
+        rock.destroy();
+      });
+    }
   }
 
   function makeRocks() {
