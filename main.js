@@ -16,6 +16,7 @@ window.onload = function () {
 
   function preload() {
     game.load.image("planet", "assets/fase01_background-01.png");
+    game.load.image("pistol", "assets/pistola.png");
 
     // load the Google WebFont Loader script
     game.load.script(
@@ -35,6 +36,13 @@ window.onload = function () {
       "assets/elements_sprites-04.png",
       "assets/elements_sprites-04.json"
     );
+
+    game.load.atlas(
+      "nave_prisao",
+      "assets/prisao-e-nave.png",
+      "assets/prisao-e-nave.json"
+    );
+
     game.load.audio("soundtrack_stage1", [
       "assets/Trilha_fase01.ogg",
       "assets/Trilha_fase01.mp3",
@@ -47,10 +55,14 @@ window.onload = function () {
     text = game.add.text(700, 50, counter);
     text.fontSize = 60;
     text.font = "Bangers";
-    game.time.events.loop(Phaser.Timer.SECOND, decreaseCounter, this);
+    textLoop = game.time.events.loop(
+      Phaser.Timer.SECOND,
+      decreaseCounter,
+      this
+    );
   }
 
-  let astronaut;
+  let astronaut, pistol_hero;
   let backgrounds;
   let soundtrack;
   let jump1, jump2;
@@ -59,8 +71,9 @@ window.onload = function () {
   let back;
   let startY;
   let rocks;
+  let rocket, prison;
   let counter = 30;
-  let loop;
+  let loop, textLoop;
 
   function create() {
     // load the background of stage 1
@@ -85,6 +98,15 @@ window.onload = function () {
     astronaut.scale.set(1);
     astronaut.animations.add("walk");
     astronaut.animations.play("walk", 10, true);
+
+    pistol_hero = game.add.image(150, 397, "pistol");
+    pistol_hero.exists = false;
+
+    //load rocket and prison
+    rocket = game.add.sprite(1000, 500, "nave_prisao", "nave");
+
+    prison = game.add.sprite(800, 300, "nave_prisao", "prisao");
+    prison.scale.setTo(0.8);
 
     // Load physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -133,21 +155,38 @@ window.onload = function () {
       }
     }
 
-    if (astronaut.x < 200) astronaut.x += 2;
+    if (astronaut.x < 150) astronaut.x += 2;
+
+    if (astronaut.x === 150 && rocket.x === 500) {
+      astronaut.animations.stop("walk", true);
+      astronaut.exists = false;
+      pistol_hero.exists = true;
+    }
 
     game.physics.arcade.collide(astronaut, rocks);
 
-    backgrounds.forEach(function (background) {
-      background.x -= 4;
-      if (background.x <= -background.width) {
-        background.x = background.width - 4;
-      }
-    });
+    if (rocket.x > 500) {
+      backgrounds.forEach(function (background) {
+        background.x -= 4;
+        if (background.x <= -background.width) {
+          background.x = background.width - 4;
+        }
+      });
+    }
 
-    if (counter === 0) {
+    console.log(counter);
+
+    if (counter <= 0) {
+      //stop the loops
       loop.loop = false;
-      rocks.exist = false;
-      text.exist = false;
+      textLoop.loop = false;
+      console.log(rocket.x);
+
+      //destroy existing objects
+      rocks.exists = false;
+      if (rocket.x > 500) rocket.x -= 4;
+      if (prison.x > 300) prison.x -= 4;
+      text.exists = false;
       rocks.forEach(function (rock) {
         rock.destroy();
       });
