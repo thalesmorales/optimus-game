@@ -39,6 +39,8 @@ window.onload = function () {
       "assets/Trilha_fase01.ogg",
       "assets/Trilha_fase01.mp3",
     ]);
+    game.load.audio("jump_sound1", ["assets/jump_sfx_01.ogg"]);
+    game.load.audio("jump_sound2", ["assets/jump_sfx_02.ogg"]);
   }
 
   function createText() {
@@ -51,6 +53,8 @@ window.onload = function () {
   let astronaut;
   let backgrounds;
   let soundtrack;
+  let jump1, jump2;
+  let canJump = true;
   let text;
   let back;
   let startY;
@@ -62,8 +66,12 @@ window.onload = function () {
     back = game.add.image(0, 0, "planet");
     back.scale.set(1);
 
+    // load audios
     soundtrack = game.add.audio("soundtrack_stage1");
     soundtrack.loopFull(0.6);
+
+    jump1 = game.add.audio("jump_sound1");
+    jump2 = game.add.audio("jump_sound2");
 
     backgrounds = game.add.group();
     backgrounds.add(back);
@@ -103,8 +111,25 @@ window.onload = function () {
     if (
       game.input.keyboard.isDown(Phaser.Keyboard.UP) &&
       astronaut.y === startY
-    )
+    ) {
       astronaut.body.velocity.y -= 350;
+
+      // play jump sound
+      let jump_set = game.rnd.integerInRange(0, 1);
+      if (jump_set && canJump) {
+        jump1.play();
+        canJump = false;
+        setTimeout(function () {
+          canJump = true;
+        }, 300);
+      } else if (canJump) {
+        jump2.play();
+        canJump = false;
+        setTimeout(function () {
+          canJump = true;
+        }, 300);
+      }
+    }
 
     if (astronaut.x < 200) astronaut.x += 2;
 
