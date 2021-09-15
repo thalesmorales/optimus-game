@@ -1,0 +1,24 @@
+{
+  "frames": [
+    {
+      "filename": "nave",
+      "frame": { "x": 20, "y": 362, "w": 238, "h": 106 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 239, "h": 105 },
+      "sourceSize": { "w": 239, "h": 105 }
+    },
+    {
+      "filename": "prisao",
+      "frame": { "x": 268, "y": 54, "w": 824, "h": 443 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 825, "h": 444 },
+      "sourceSize": { "w": 825, "h": 444 }
+    }
+  ],
+  "meta": {
+    "image": "elements_sprites-04.png",
+    "size": { "w": 1089, "h": 500 }
+  }
+}
