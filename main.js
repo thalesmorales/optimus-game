@@ -17,6 +17,7 @@ window.onload = function () {
   function preload() {
     game.load.image("planet", "assets/fase01_background-01.png");
     game.load.image("pistol", "assets/pistola.png");
+    game.load.image("title", "assets/logo-primo-01.png");
 
     // load the Google WebFont Loader script
     game.load.script(
@@ -134,6 +135,10 @@ window.onload = function () {
     astronaut.body.gravity.y = 1000;
     astronaut.body.collideWorldBounds = true;
     startY = astronaut.y;
+
+    //load the game title
+    let title = game.add.image(0, 0, "title");
+    title.exists = true;
 
     rocks = game.add.group();
     loop = game.time.events.loop(Phaser.Timer.SECOND, makeRocks, this);
