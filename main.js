@@ -59,6 +59,8 @@ window.onload = function () {
 
     game.load.audio("jump_sound1", ["assets/jump_sfx_01.ogg"]);
     game.load.audio("jump_sound2", ["assets/jump_sfx_02.ogg"]);
+
+    game.load.audio("explosion_audio", ["assets/explosion_powerful.ogg"]);
   }
 
   function createText() {
@@ -85,7 +87,7 @@ window.onload = function () {
   let counter = 30;
   let shot = false;
   let loop, textLoop;
-  let explosion;
+  let explosion, explosion_audio;
 
   function create() {
     // load the background of stage 1
@@ -100,6 +102,8 @@ window.onload = function () {
 
     jump1 = game.add.audio("jump_sound1");
     jump2 = game.add.audio("jump_sound2");
+
+    explosion_audio = game.add.audio("explosion_audio");
 
     backgrounds = game.add.group();
     backgrounds.add(back);
@@ -147,7 +151,7 @@ window.onload = function () {
   }
 
   function decreaseCounter() {
-    counter--;
+    counter -= 5;
     text.setText(counter);
   }
 
@@ -226,6 +230,8 @@ window.onload = function () {
   function shoot() {
     explosion.exists = true;
     explosion.animations.play("explode", 10, false);
+    explosion_audio.play();
+
     game.time.events.add(
       Phaser.Timer.SECOND / 8,
       function () {
