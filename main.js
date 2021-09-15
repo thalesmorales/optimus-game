@@ -147,7 +147,7 @@ window.onload = function () {
   }
 
   function decreaseCounter() {
-    counter -= 5;
+    counter--;
     text.setText(counter);
   }
 
