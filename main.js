@@ -82,6 +82,7 @@ window.onload = function () {
   let rocks;
   let rocket, prison;
   let counter = 30;
+  let shot = false;
   let loop, textLoop;
   let explosion;
 
@@ -121,9 +122,10 @@ window.onload = function () {
     prison.scale.setTo(0.8);
 
     //load explosion
-    explosion = game.add.sprite(50, 100, "explosao");
+    explosion = game.add.sprite(300, 200, "explosao");
+    explosion.scale.setTo(2);
+    explosion.exists = false;
     explosion.animations.add("explode");
-    explosion.animations.play("explode", 10, true);
 
     // Load physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -140,7 +142,7 @@ window.onload = function () {
   }
 
   function decreaseCounter() {
-    counter--;
+    counter -= 5;
     text.setText(counter);
   }
 
@@ -180,6 +182,10 @@ window.onload = function () {
       astronaut.animations.stop("walk", true);
       astronaut.exists = false;
       pistol_hero.exists = true;
+      if (!shot) {
+        shot = true;
+        game.time.events.add(Phaser.Timer.SECOND * 1.5, shoot, this);
+      }
     }
 
     game.physics.arcade.collide(astronaut, rocks);
@@ -210,6 +216,29 @@ window.onload = function () {
         rock.destroy();
       });
     }
+  }
+
+  function shoot() {
+    explosion.exists = true;
+    explosion.animations.play("explode", 10, false);
+    game.time.events.add(
+      Phaser.Timer.SECOND / 8,
+      function () {
+        //prison.exists = false;
+        game.add
+          .tween(prison)
+          .to({ alpha: 0 }, 100, Phaser.Easing.Linear.None, true);
+
+        game.time.events.add(
+          Phaser.Timer.SECOND / 3,
+          function () {
+            explosion.exists = false;
+          },
+          this
+        );
+      },
+      this
+    );
   }
 
   function makeRocks() {
