@@ -1,0 +1,72 @@
+{
+  "frames": [
+    {
+      "filename": "explosion0001",
+      "frame": { "x": 18, "y": 97, "w": 150, "h": 128 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 151, "h": 129 },
+      "sourceSize": { "w": 151, "h": 105 }
+    },
+    {
+      "filename": "explosion0002",
+      "frame": { "x": 185, "y": 97, "w": 198, "h": 128 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 199, "h": 129 },
+      "sourceSize": { "w": 199, "h": 129 }
+    },
+    {
+      "filename": "explosion0003",
+      "frame": { "x": 407, "y": 97, "w": 238, "h": 128 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 239, "h": 129 },
+      "sourceSize": { "w": 239, "h": 129 }
+    },
+    {
+      "filename": "explosion0004",
+      "frame": { "x": 693, "y": 34, "w": 339, "h": 189 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 340, "h": 190 },
+      "sourceSize": { "w": 340, "h": 190 }
+    },
+    {
+      "filename": "explosion0005",
+      "frame": { "x": 1035, "y": 34, "w": 311, "h": 189 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 312, "h": 190 },
+      "sourceSize": { "w": 312, "h": 190 }
+    },
+    {
+      "filename": "explosion0006",
+      "frame": { "x": 1354, "y": 34, "w": 285, "h": 189 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 286, "h": 190 },
+      "sourceSize": { "w": 286, "h": 190 }
+    },
+    {
+      "filename": "explosion0007",
+      "frame": { "x": 1620, "y": 34, "w": 252, "h": 189 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 253, "h": 190 },
+      "sourceSize": { "w": 253, "h": 190 }
+    },
+    {
+      "filename": "explosion0008",
+      "frame": { "x": 1916, "y": 34, "w": 208, "h": 189 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 209, "h": 190 },
+      "sourceSize": { "w": 209, "h": 190 }
+    }
+  ],
+  "meta": {
+    "image": "explosion-01.png",
+    "size": { "w": 2148, "h": 225 }
+  }
+}

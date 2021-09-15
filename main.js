@@ -43,6 +43,12 @@ window.onload = function () {
       "assets/prisao-e-nave.json"
     );
 
+    game.load.atlas(
+      "explosao",
+      "assets/explosion-01.png",
+      "assets/explosion-01.json"
+    );
+
     game.load.audio("soundtrack_stage1", [
       "assets/Trilha_fase01.ogg",
       "assets/Trilha_fase01.mp3",
@@ -77,6 +83,7 @@ window.onload = function () {
   let rocket, prison;
   let counter = 30;
   let loop, textLoop;
+  let explosion;
 
   function create() {
     // load the background of stage 1
@@ -112,6 +119,11 @@ window.onload = function () {
 
     prison = game.add.sprite(800, 300, "nave_prisao", "prisao");
     prison.scale.setTo(0.8);
+
+    //load explosion
+    explosion = game.add.sprite(50, 100, "explosao");
+    explosion.animations.add("explode");
+    explosion.animations.play("explode", 10, true);
 
     // Load physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
