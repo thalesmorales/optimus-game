@@ -60,6 +60,8 @@ window.onload = function () {
     game.load.audio("jump_sound1", ["assets/jump_sfx_01.ogg"]);
     game.load.audio("jump_sound2", ["assets/jump_sfx_02.ogg"]);
 
+    game.load.audio("obrigado", ["assets/obrigado.ogg"]);
+
     game.load.audio("explosion_audio", ["assets/explosion_powerful.ogg"]);
   }
 
@@ -85,9 +87,12 @@ window.onload = function () {
   let rocks;
   let rocket, prison;
   let counter = 30;
-  let shot = false;
+  let shot = false,
+    already_shot = false;
   let loop, textLoop;
   let explosion, explosion_audio;
+  let obrigado,
+    obrigado_played = false;
 
   function create() {
     // load the background of stage 1
@@ -102,6 +107,8 @@ window.onload = function () {
 
     jump1 = game.add.audio("jump_sound1");
     jump2 = game.add.audio("jump_sound2");
+
+    obrigado = game.add.audio("obrigado");
 
     explosion_audio = game.add.audio("explosion_audio");
 
@@ -189,13 +196,21 @@ window.onload = function () {
 
     if (astronaut.x === 150 && rocket.x === 500) {
       astronaut.animations.stop("walk", true);
-      astronaut.exists = false;
-      pistol_hero.exists = true;
+      if (!already_shot) {
+        astronaut.exists = false;
+        pistol_hero.exists = true;
+      }
       if (!shot) {
         shot = true;
         game.time.events.add(Phaser.Timer.SECOND * 1.5, shoot, this);
       }
     }
+    if (already_shot)
+      if (rocket.x > 300) rocket.x -= 2;
+      else if (!obrigado_played) {
+        obrigado.play();
+        obrigado_played = true;
+      }
 
     game.physics.arcade.collide(astronaut, rocks);
 
@@ -207,8 +222,6 @@ window.onload = function () {
         }
       });
     }
-
-    console.log(counter);
 
     if (counter <= 0) {
       //stop the loops
@@ -244,6 +257,9 @@ window.onload = function () {
           Phaser.Timer.SECOND / 3,
           function () {
             explosion.exists = false;
+            already_shot = true;
+            pistol_hero.exists = false;
+            astronaut.exists = true;
           },
           this
         );
